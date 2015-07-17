@@ -1,0 +1,57 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.5.RELEASE'
+      
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+apply plugin: 'java'
+apply plugin: 'spring-boot' 
+
+
+jar {
+    baseName = 'bootSchedulerXml'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile "org.springframework.boot:spring-boot-starter-logging"
+    compile("org.projectlombok:lombok:1.16.4")
+    compile 'org.springframework:spring-context-support:4.1.7.RELEASE'
+    compile("com.google.guava:guava:18.0")
+    
+    compile ('org.quartz-scheduler:quartz:2.2.1')
+    compile ('org.quartz-scheduler:quartz-jobs:2.2.1')
+   
+    runtime("com.h2database:h2")
+    testCompile('junit:junit:4.12')
+    testCompile('org.easytesting:fest-assert:1.4')
+    compile ("com.jayway.awaitility:awaitility:1.6.3") 
+    testCompile 'org.assertj:assertj-core:3.1.0'
+    testCompile 'com.jayway.awaitility:awaitility-java8:1.6.1'
+    testCompile("org.springframework.boot:spring-boot-starter-test") 
+}
+
+
+
+println "Using Spring Boot version: [$springBootVersion]"
+println "Using Java version: [" + System.getProperty("java.version") + "]"
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}
